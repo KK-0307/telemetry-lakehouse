@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.hypothesis/
+lakehouse/
+dist/
+*.egg-info/
+benchmarks/.work/
+lakehouse-demo/
+.DS_Store
