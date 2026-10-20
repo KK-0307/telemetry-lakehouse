@@ -1,0 +1,203 @@
+{
+  "label": "scale-10M",
+  "started_at": "2026-10-20T00:17:52+00:00",
+  "hardware": {
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "cpu": "Apple M4 Max",
+    "logical_cores": 14,
+    "ram_gib": 36.0,
+    "python": "3.14.4",
+    "pyarrow": "26.0.0",
+    "duckdb": "1.5.6",
+    "pydantic": "2.14.1",
+    "sqlite": "3.53.3"
+  },
+  "config": {
+    "devices": 1000,
+    "seed": 42,
+    "repeats": 1,
+    "simulator_rate_per_second": 1.0,
+    "default_batch_size": 5000,
+    "default_compression": "zstd"
+  },
+  "scales": {
+    "10000000": {
+      "batch_size": 5000,
+      "compression": "zstd",
+      "repeats": 1,
+      "records": 10000000,
+      "batches": 2000,
+      "files": 2111,
+      "summary": {
+        "elapsed_s": {
+          "median": 576.3659444157965,
+          "min": 576.3659444157965,
+          "max": 576.3659444157965,
+          "n": 1
+        },
+        "events_per_second": {
+          "median": 17350.088250158467,
+          "min": 17350.088250158467,
+          "max": 17350.088250158467,
+          "n": 1
+        },
+        "peak_rss_mb": {
+          "median": 3629.265625,
+          "min": 3629.265625,
+          "max": 3629.265625,
+          "n": 1
+        },
+        "parquet_write_mb_per_s": {
+          "median": 26.90017664753091,
+          "min": 26.90017664753091,
+          "max": 26.90017664753091,
+          "n": 1
+        },
+        "storage_bytes": {
+          "median": 463207474,
+          "min": 463207474,
+          "max": 463207474,
+          "n": 1
+        }
+      },
+      "gate_latency_ms_p50": {
+        "median": 24.436833802610636,
+        "min": 24.436833802610636,
+        "max": 24.436833802610636,
+        "n": 1
+      },
+      "gate_latency_ms_p95": {
+        "median": 26.932999957352877,
+        "min": 26.932999957352877,
+        "max": 26.932999957352877,
+        "n": 1
+      },
+      "publish_latency_ms_p50": {
+        "median": 177.71625006571412,
+        "min": 177.71625006571412,
+        "max": 177.71625006571412,
+        "n": 1
+      },
+      "publish_latency_ms_p95": {
+        "median": 829.2075423523784,
+        "min": 829.2075423523784,
+        "max": 829.2075423523784,
+        "n": 1
+      },
+      "stage_share": {
+        "gate": 0.09069601036763988,
+        "stage": 0.02987597686564132,
+        "verify": 0.007777160146487961,
+        "place": 0.0008765148032757007,
+        "commit": 0.8373733288266734
+      },
+      "parquet_write_rows_per_s": {
+        "median": 580737.102863131,
+        "min": 580737.102863131,
+        "max": 580737.102863131,
+        "n": 1
+      },
+      "runs": [
+        {
+          "records": 10000000,
+          "batches": 2000,
+          "files": 2111,
+          "elapsed_s": 576.3659444157965,
+          "events_per_second": 17350.088250158467,
+          "peak_rss_mb": 3629.265625,
+          "bytes_written": 463207474,
+          "stage_totals_s": {
+            "gate": 52.274091670289636,
+            "stage": 17.21949562150985,
+            "verify": 4.482490252703428,
+            "place": 0.5051932823844254,
+            "commit": 482.633469497785
+          },
+          "gate_latency_ms": {
+            "p50": 24.436833802610636,
+            "p95": 26.932999957352877,
+            "max": 447.12208304554224
+          },
+          "publish_latency_ms": {
+            "p50": 177.71625006571412,
+            "p95": 829.2075423523784,
+            "max": 1331.0767081566155
+          },
+          "parquet_write_mb_per_s": 26.90017664753091,
+          "parquet_write_rows_per_s": 580737.102863131,
+          "storage_bytes": 463207474
+        }
+      ],
+      "queries": {
+        "connect_and_view_setup_s": {
+          "median": 0.02995595894753933,
+          "min": 0.026210083160549402,
+          "max": 0.04965179180726409,
+          "n": 5
+        },
+        "count": {
+          "median": 0.09004720812663436,
+          "min": 0.08937445795163512,
+          "max": 0.1285899579524994,
+          "n": 5,
+          "first": 0.1285899579524994
+        },
+        "fleet-summary": {
+          "median": 0.14193904167041183,
+          "min": 0.13989379117265344,
+          "max": 0.19920550007373095,
+          "n": 5,
+          "first": 0.19920550007373095
+        },
+        "hourly-device-health": {
+          "median": 0.34970037499442697,
+          "min": 0.34392554219812155,
+          "max": 0.4107304587960243,
+          "n": 5,
+          "first": 0.4107304587960243
+        },
+        "battery-health": {
+          "median": 0.24380954168736935,
+          "min": 0.24148279102519155,
+          "max": 0.2510145828127861,
+          "n": 5,
+          "first": 0.24893712485209107
+        },
+        "point-lookup": {
+          "median": 0.1122008329257369,
+          "min": 0.11163674993440509,
+          "max": 0.1655594171024859,
+          "n": 5,
+          "first": 0.1655594171024859
+        }
+      },
+      "replay_verify": {
+        "replay": {
+          "seconds": 488.33661354193464,
+          "batches": 2000,
+          "rows": 10000000,
+          "rows_per_second": 20477.6781480082,
+          "all_identical": true
+        },
+        "deep_file_check_s": 0.8481379998847842,
+        "deep_file_check_problems": 0,
+        "verify": {
+          "seconds": 23.077999707777053,
+          "result": "PASS",
+          "assertions": 18
+        }
+      }
+    }
+  },
+  "generation": {
+    "10000000": {
+      "events": 10000000,
+      "seconds": 79.65616437513381,
+      "events_per_second": 125539.56217256289,
+      "source_bytes": 3079051907,
+      "source_id": "sim-seed42"
+    }
+  },
+  "finished_at": "2026-10-20T00:37:28+00:00"
+}

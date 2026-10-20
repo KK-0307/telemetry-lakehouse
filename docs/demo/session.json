@@ -1,0 +1,162 @@
+[
+  {
+    "kind": "say",
+    "text": "# 1. A valid stream: 20,000 events from 1,000 devices -> committed batches"
+  },
+  {
+    "kind": "run",
+    "display": "uv run telemetry simulate --devices 1000 --events 20000 --seed 42",
+    "output": [
+      "{\"source\": \"lakehouse/source/events.jsonl\", \"source_id\": \"sim-seed42\", \"records\": 20000, \"complete\": true, \"faults_injected\": {}}"
+    ],
+    "exit": 0,
+    "seconds": 0.712
+  },
+  {
+    "kind": "run",
+    "display": "uv run telemetry ingest --batch-size 5000 --format text",
+    "output": [
+      "source sim-seed42: read 20,000 records in 4 batches -> 20,000 rows committed in 4 files (0 batches already committed, 0 blocked) in 0.30s (67,775 events/s)",
+      "  accounting: consumed=20,000 accepted=20,000 duplicates=0 rejected=0 unresolved=0 committed=20,000",
+      "  sequences: 0 gaps proven (0 events missing, basis: end_of_stream)"
+    ],
+    "exit": 0,
+    "seconds": 0.587
+  },
+  {
+    "kind": "say",
+    "text": "# DuckDB re-verifies the published Parquet with 18 independent SQL assertions"
+  },
+  {
+    "kind": "run",
+    "display": "uv run telemetry verify",
+    "output": [
+      "Telemetry Lakehouse integrity report",
+      "dataset : 20,000 events | 1,000 devices | 4 files | 4 committed batches | dates 2026-01-01 .. 2026-01-01",
+      "manifest: last commit_seq 4 | batch states {'COMMITTED': 4}",
+      "",
+      "PASS  identity       unique_event_id                      0 violations",
+      "PASS  identity       unique_device_sequence               0 violations",
+      "PASS  contract       required_fields_complete             0 violations",
+      "PASS  contract       valid_measurement_ranges             0 violations",
+      "PASS  contract       valid_enums_and_versions             0 violations",
+      "PASS  contract       event_time_not_in_future             0 violations",
+      "PASS  partitioning   partition_matches_event_time         0 violations",
+      "PASS  contract       parquet_schema_matches_contract      0 violations",
+      "PASS  reconciliation batch_accounting_identity            0 violations",
+      "PASS  reconciliation batch_row_counts_reconcile           0 violations",
+      "PASS  trust          no_untrusted_batches_in_data         0 violations",
+      "PASS  trust          events_and_index_agree               0 violations",
+      "PASS  trust          no_unreferenced_files_in_data        0 violations",
+      "PASS  consistency    manifest_files_match_physical        0 violations",
+      "PASS  consistency    no_unfinished_batches                0 violations",
+      "PASS  completeness   sequence_gaps_beyond_grace           0 violations",
+      "PASS  completeness   sequences_complete_to_end_of_stream  0 violations",
+      "PASS  completeness   offset_coverage_no_holes             0 violations",
+      "",
+      "RESULT: PASS - 18 pass (18 assertions)"
+    ],
+    "exit": 0,
+    "seconds": 0.622
+  },
+  {
+    "kind": "say",
+    "text": "# 2. A second source with corrupted measurements injected"
+  },
+  {
+    "kind": "run",
+    "display": "uv run telemetry simulate --events 20000 --seed 43 --device-prefix edge --out b.jsonl --fault invalid_value=0.0002",
+    "output": [
+      "{\"source\": \"b.jsonl\", \"source_id\": \"sim-seed43\", \"records\": 20000, \"complete\": true, \"faults_injected\": {\"invalid_value\": 6}}"
+    ],
+    "exit": 0,
+    "seconds": 0.458
+  },
+  {
+    "kind": "run",
+    "display": "uv run telemetry ingest --source b.jsonl --batch-size 5000 --format text",
+    "output": [
+      "source sim-seed43: read 10,000 records in 2 batches -> 5,000 rows committed in 1 file (0 batches already committed, 1 blocked) in 0.11s (90,697 events/s)",
+      "  accounting: consumed=10,000 accepted=9,998 duplicates=0 rejected=2 unresolved=0 committed=5,000",
+      "  (a blocked batch is classified but publishes nothing: committed counts only admitted batches)",
+      "  BLOCKED batch b8ff3fd422ee51627 offsets [5,000, 10,000): OUT_OF_RANGE=2",
+      "    evidence: lakehouse/rejected/b8ff3fd422ee51627/attempt-0001/report.json",
+      "  run halted at the blocked batch: nothing after it was published"
+    ],
+    "exit": 3,
+    "seconds": 0.41
+  },
+  {
+    "kind": "run",
+    "display": "echo \"exit status: $?\"",
+    "output": [
+      "exit status: 3"
+    ],
+    "exit": 0,
+    "seconds": 0.0
+  },
+  {
+    "kind": "run",
+    "display": "uv run telemetry status",
+    "output": [
+      "{",
+      "  \"batches\": {",
+      "    \"COMMITTED\": 5,",
+      "    \"REJECTED\": 1",
+      "  },",
+      "  \"last_commit_seq\": 5,",
+      "  \"committed_rows\": 25000,",
+      "  \"in_flight\": []",
+      "}"
+    ],
+    "exit": 0,
+    "seconds": 0.283
+  },
+  {
+    "kind": "say",
+    "text": "# 3. The rejected batch never reached the trusted data - DuckDB agrees"
+  },
+  {
+    "kind": "run",
+    "display": "uv run telemetry verify --allow-incomplete",
+    "output": [
+      "Telemetry Lakehouse integrity report",
+      "dataset : 25,000 events | 1,985 devices | 5 files | 5 committed batches | dates 2026-01-01 .. 2026-01-01",
+      "manifest: last commit_seq 5 | batch states {'COMMITTED': 5, 'REJECTED': 1}",
+      "",
+      "PASS  identity       unique_event_id                      0 violations",
+      "PASS  identity       unique_device_sequence               0 violations",
+      "PASS  contract       required_fields_complete             0 violations",
+      "PASS  contract       valid_measurement_ranges             0 violations",
+      "PASS  contract       valid_enums_and_versions             0 violations",
+      "PASS  contract       event_time_not_in_future             0 violations",
+      "PASS  partitioning   partition_matches_event_time         0 violations",
+      "PASS  contract       parquet_schema_matches_contract      0 violations",
+      "PASS  reconciliation batch_accounting_identity            0 violations",
+      "PASS  reconciliation batch_row_counts_reconcile           0 violations",
+      "PASS  trust          no_untrusted_batches_in_data         0 violations",
+      "PASS  trust          events_and_index_agree               0 violations",
+      "PASS  trust          no_unreferenced_files_in_data        0 violations",
+      "PASS  consistency    manifest_files_match_physical        0 violations",
+      "PASS  consistency    no_unfinished_batches                0 violations",
+      "PASS  completeness   sequence_gaps_beyond_grace           0 violations",
+      "PASS  completeness   sequences_complete_to_end_of_stream  0 violations",
+      "PASS  completeness   offset_coverage_no_holes             0 violations",
+      "",
+      "RESULT: PASS - 18 pass (18 assertions)"
+    ],
+    "exit": 0,
+    "seconds": 0.607
+  },
+  {
+    "kind": "run",
+    "display": "uv run telemetry query --name fleet-summary",
+    "output": [
+      "event_date  events  active_devices  avg_temperature_c  avg_battery_pct  non_ok_pct",
+      "----------  ------  --------------  -----------------  ---------------  ----------",
+      "2026-01-01  25000   1985            16.64              64.94            1.216     "
+    ],
+    "exit": 0,
+    "seconds": 0.32
+  }
+]

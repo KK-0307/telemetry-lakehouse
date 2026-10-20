@@ -1,0 +1,552 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="913" height="592" viewBox="0 0 913 592" role="img" aria-labelledby="t d">
+<title id="t">Telemetry Lakehouse demo</title><desc id="d">Animated terminal recording of a real run: a valid stream is ingested and committed, DuckDB verifies it (18 SQL assertions), a corrupted batch is rejected, and DuckDB verifies the data is unchanged. Playback 70s; the commands really took 4.0s in total.</desc>
+<style>
+text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono','DejaVu Sans Mono',monospace;font-size:13px;white-space:pre}
+@keyframes scroll{0%{transform:translateY(0)}28.805%{transform:translateY(0px)}29.020%{transform:translateY(-18px)}28.927%{transform:translateY(-18px)}29.143%{transform:translateY(-36px)}29.049%{transform:translateY(-36px)}29.265%{transform:translateY(-54px)}29.171%{transform:translateY(-54px)}29.387%{transform:translateY(-72px)}29.294%{transform:translateY(-72px)}29.509%{transform:translateY(-90px)}29.416%{transform:translateY(-90px)}29.632%{transform:translateY(-108px)}29.538%{transform:translateY(-108px)}29.754%{transform:translateY(-126px)}33.976%{transform:translateY(-126px)}34.192%{transform:translateY(-144px)}34.695%{transform:translateY(-144px)}34.911%{transform:translateY(-162px)}37.687%{transform:translateY(-162px)}37.903%{transform:translateY(-180px)}44.275%{transform:translateY(-180px)}44.491%{transform:translateY(-198px)}44.397%{transform:translateY(-198px)}44.613%{transform:translateY(-216px)}49.295%{transform:translateY(-216px)}49.511%{transform:translateY(-234px)}53.697%{transform:translateY(-234px)}53.913%{transform:translateY(-252px)}53.819%{transform:translateY(-252px)}54.035%{transform:translateY(-270px)}53.941%{transform:translateY(-270px)}54.157%{transform:translateY(-288px)}54.064%{transform:translateY(-288px)}54.279%{transform:translateY(-306px)}54.186%{transform:translateY(-306px)}54.402%{transform:translateY(-324px)}54.308%{transform:translateY(-324px)}54.524%{transform:translateY(-342px)}54.430%{transform:translateY(-342px)}54.646%{transform:translateY(-360px)}58.983%{transform:translateY(-360px)}59.199%{transform:translateY(-378px)}60.853%{transform:translateY(-378px)}61.069%{transform:translateY(-396px)}65.406%{transform:translateY(-396px)}65.621%{transform:translateY(-414px)}67.333%{transform:translateY(-414px)}67.549%{transform:translateY(-432px)}67.455%{transform:translateY(-432px)}67.671%{transform:translateY(-450px)}67.578%{transform:translateY(-450px)}67.793%{transform:translateY(-468px)}67.700%{transform:translateY(-468px)}67.916%{transform:translateY(-486px)}67.822%{transform:translateY(-486px)}68.038%{transform:translateY(-504px)}67.944%{transform:translateY(-504px)}68.160%{transform:translateY(-522px)}68.067%{transform:translateY(-522px)}68.283%{transform:translateY(-540px)}68.189%{transform:translateY(-540px)}68.405%{transform:translateY(-558px)}68.311%{transform:translateY(-558px)}68.527%{transform:translateY(-576px)}72.749%{transform:translateY(-576px)}72.965%{transform:translateY(-594px)}73.468%{transform:translateY(-594px)}73.684%{transform:translateY(-612px)}76.000%{transform:translateY(-612px)}76.215%{transform:translateY(-630px)}78.905%{transform:translateY(-630px)}79.121%{transform:translateY(-648px)}79.028%{transform:translateY(-648px)}79.243%{transform:translateY(-666px)}79.150%{transform:translateY(-666px)}79.366%{transform:translateY(-684px)}79.272%{transform:translateY(-684px)}79.488%{transform:translateY(-702px)}79.394%{transform:translateY(-702px)}79.610%{transform:translateY(-720px)}79.517%{transform:translateY(-720px)}79.732%{transform:translateY(-738px)}79.639%{transform:translateY(-738px)}79.855%{transform:translateY(-756px)}79.761%{transform:translateY(-756px)}79.977%{transform:translateY(-774px)}79.883%{transform:translateY(-774px)}80.099%{transform:translateY(-792px)}80.006%{transform:translateY(-792px)}80.222%{transform:translateY(-810px)}80.128%{transform:translateY(-810px)}80.344%{transform:translateY(-828px)}80.250%{transform:translateY(-828px)}80.466%{transform:translateY(-846px)}80.373%{transform:translateY(-846px)}80.588%{transform:translateY(-864px)}80.495%{transform:translateY(-864px)}80.711%{transform:translateY(-882px)}80.617%{transform:translateY(-882px)}80.833%{transform:translateY(-900px)}80.739%{transform:translateY(-900px)}80.955%{transform:translateY(-918px)}80.862%{transform:translateY(-918px)}81.077%{transform:translateY(-936px)}80.984%{transform:translateY(-936px)}81.200%{transform:translateY(-954px)}81.106%{transform:translateY(-954px)}81.322%{transform:translateY(-972px)}81.228%{transform:translateY(-972px)}81.444%{transform:translateY(-990px)}81.351%{transform:translateY(-990px)}81.566%{transform:translateY(-1008px)}81.473%{transform:translateY(-1008px)}81.689%{transform:translateY(-1026px)}81.595%{transform:translateY(-1026px)}81.811%{transform:translateY(-1044px)}81.717%{transform:translateY(-1044px)}81.933%{transform:translateY(-1062px)}86.385%{transform:translateY(-1062px)}86.601%{transform:translateY(-1080px)}89.348%{transform:translateY(-1080px)}89.564%{transform:translateY(-1098px)}89.471%{transform:translateY(-1098px)}89.686%{transform:translateY(-1116px)}89.593%{transform:translateY(-1116px)}89.809%{transform:translateY(-1134px)}99.712%{transform:translateY(-1134px)}100%{transform:translateY(0)}}
+@keyframes s0{0%{opacity:0}1.870%{opacity:0}1.871%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.s0{animation:s0 69.52s linear infinite;opacity:0}
+@keyframes c1_0{0%{opacity:0}4.574%{opacity:0}4.575%{opacity:1}4.977%{opacity:1}4.978%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c1_0{animation:c1_0 69.52s linear infinite;opacity:0}
+@keyframes c1_1{0%{opacity:0}4.977%{opacity:0}4.978%{opacity:1}5.380%{opacity:1}5.381%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c1_1{animation:c1_1 69.52s linear infinite;opacity:0}
+@keyframes c1_2{0%{opacity:0}5.380%{opacity:0}5.381%{opacity:1}5.783%{opacity:1}5.784%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c1_2{animation:c1_2 69.52s linear infinite;opacity:0}
+@keyframes c1_3{0%{opacity:0}5.783%{opacity:0}5.784%{opacity:1}6.185%{opacity:1}6.186%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c1_3{animation:c1_3 69.52s linear infinite;opacity:0}
+@keyframes c1_4{0%{opacity:0}6.185%{opacity:0}6.186%{opacity:1}6.588%{opacity:1}6.589%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c1_4{animation:c1_4 69.52s linear infinite;opacity:0}
+@keyframes c1_5{0%{opacity:0}6.588%{opacity:0}6.589%{opacity:1}6.991%{opacity:1}6.992%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c1_5{animation:c1_5 69.52s linear infinite;opacity:0}
+@keyframes c1_6{0%{opacity:0}6.991%{opacity:0}6.992%{opacity:1}7.394%{opacity:1}7.395%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c1_6{animation:c1_6 69.52s linear infinite;opacity:0}
+@keyframes c1_7{0%{opacity:0}7.394%{opacity:0}7.395%{opacity:1}7.796%{opacity:1}7.797%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c1_7{animation:c1_7 69.52s linear infinite;opacity:0}
+@keyframes c1_8{0%{opacity:0}7.796%{opacity:0}7.797%{opacity:1}7.911%{opacity:1}7.912%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c1_8{animation:c1_8 69.52s linear infinite;opacity:0}
+@keyframes c1_9{0%{opacity:0}7.911%{opacity:0}7.912%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c1_9{animation:c1_9 69.52s linear infinite;opacity:0}
+@keyframes o2{0%{opacity:0}8.631%{opacity:0}8.632%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o2{animation:o2 69.52s linear infinite;opacity:0}
+@keyframes o3{0%{opacity:0}8.753%{opacity:0}8.754%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o3{animation:o3 69.52s linear infinite;opacity:0}
+@keyframes c4_0{0%{opacity:0}13.536%{opacity:0}13.537%{opacity:1}13.881%{opacity:1}13.882%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c4_0{animation:c4_0 69.52s linear infinite;opacity:0}
+@keyframes c4_1{0%{opacity:0}13.881%{opacity:0}13.882%{opacity:1}14.226%{opacity:1}14.227%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c4_1{animation:c4_1 69.52s linear infinite;opacity:0}
+@keyframes c4_2{0%{opacity:0}14.226%{opacity:0}14.227%{opacity:1}14.571%{opacity:1}14.572%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c4_2{animation:c4_2 69.52s linear infinite;opacity:0}
+@keyframes c4_3{0%{opacity:0}14.571%{opacity:0}14.572%{opacity:1}14.917%{opacity:1}14.918%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c4_3{animation:c4_3 69.52s linear infinite;opacity:0}
+@keyframes c4_4{0%{opacity:0}14.917%{opacity:0}14.918%{opacity:1}15.262%{opacity:1}15.263%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c4_4{animation:c4_4 69.52s linear infinite;opacity:0}
+@keyframes c4_5{0%{opacity:0}15.262%{opacity:0}15.263%{opacity:1}15.607%{opacity:1}15.608%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c4_5{animation:c4_5 69.52s linear infinite;opacity:0}
+@keyframes c4_6{0%{opacity:0}15.607%{opacity:0}15.608%{opacity:1}15.952%{opacity:1}15.953%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c4_6{animation:c4_6 69.52s linear infinite;opacity:0}
+@keyframes c4_7{0%{opacity:0}15.952%{opacity:0}15.953%{opacity:1}16.297%{opacity:1}16.298%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c4_7{animation:c4_7 69.52s linear infinite;opacity:0}
+@keyframes c4_8{0%{opacity:0}16.297%{opacity:0}16.298%{opacity:1}16.355%{opacity:1}16.356%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c4_8{animation:c4_8 69.52s linear infinite;opacity:0}
+@keyframes c4_9{0%{opacity:0}16.355%{opacity:0}16.356%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c4_9{animation:c4_9 69.52s linear infinite;opacity:0}
+@keyframes o5{0%{opacity:0}17.074%{opacity:0}17.075%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o5{animation:o5 69.52s linear infinite;opacity:0}
+@keyframes o6{0%{opacity:0}17.196%{opacity:0}17.197%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o6{animation:o6 69.52s linear infinite;opacity:0}
+@keyframes o7{0%{opacity:0}17.319%{opacity:0}17.320%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o7{animation:o7 69.52s linear infinite;opacity:0}
+@keyframes o8{0%{opacity:0}17.441%{opacity:0}17.442%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o8{animation:o8 69.52s linear infinite;opacity:0}
+@keyframes o9{0%{opacity:0}21.879%{opacity:0}21.880%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o9{animation:o9 69.52s linear infinite;opacity:0}
+@keyframes s10{0%{opacity:0}22.598%{opacity:0}22.599%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.s10{animation:s10 69.52s linear infinite;opacity:0}
+@keyframes c11_0{0%{opacity:0}25.014%{opacity:0}25.015%{opacity:1}25.129%{opacity:1}25.130%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c11_0{animation:c11_0 69.52s linear infinite;opacity:0}
+@keyframes c11_1{0%{opacity:0}25.129%{opacity:0}25.130%{opacity:1}25.245%{opacity:1}25.246%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c11_1{animation:c11_1 69.52s linear infinite;opacity:0}
+@keyframes c11_2{0%{opacity:0}25.245%{opacity:0}25.246%{opacity:1}25.360%{opacity:1}25.361%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c11_2{animation:c11_2 69.52s linear infinite;opacity:0}
+@keyframes c11_3{0%{opacity:0}25.360%{opacity:0}25.361%{opacity:1}25.475%{opacity:1}25.476%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c11_3{animation:c11_3 69.52s linear infinite;opacity:0}
+@keyframes c11_4{0%{opacity:0}25.475%{opacity:0}25.476%{opacity:1}25.590%{opacity:1}25.591%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c11_4{animation:c11_4 69.52s linear infinite;opacity:0}
+@keyframes c11_5{0%{opacity:0}25.590%{opacity:0}25.591%{opacity:1}25.705%{opacity:1}25.706%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c11_5{animation:c11_5 69.52s linear infinite;opacity:0}
+@keyframes c11_6{0%{opacity:0}25.705%{opacity:0}25.706%{opacity:1}25.820%{opacity:1}25.821%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c11_6{animation:c11_6 69.52s linear infinite;opacity:0}
+@keyframes c11_7{0%{opacity:0}25.820%{opacity:0}25.821%{opacity:1}25.935%{opacity:1}25.936%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c11_7{animation:c11_7 69.52s linear infinite;opacity:0}
+@keyframes c11_8{0%{opacity:0}25.935%{opacity:0}25.936%{opacity:1}26.050%{opacity:1}26.051%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c11_8{animation:c11_8 69.52s linear infinite;opacity:0}
+@keyframes c11_9{0%{opacity:0}26.050%{opacity:0}26.051%{opacity:1}26.165%{opacity:1}26.166%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c11_9{animation:c11_9 69.52s linear infinite;opacity:0}
+@keyframes c11_10{0%{opacity:0}26.165%{opacity:0}26.166%{opacity:1}26.223%{opacity:1}26.224%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c11_10{animation:c11_10 69.52s linear infinite;opacity:0}
+@keyframes c11_11{0%{opacity:0}26.223%{opacity:0}26.224%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c11_11{animation:c11_11 69.52s linear infinite;opacity:0}
+@keyframes o12{0%{opacity:0}26.942%{opacity:0}26.943%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o12{animation:o12 69.52s linear infinite;opacity:0}
+@keyframes o13{0%{opacity:0}27.064%{opacity:0}27.065%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o13{animation:o13 69.52s linear infinite;opacity:0}
+@keyframes o14{0%{opacity:0}27.186%{opacity:0}27.187%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o14{animation:o14 69.52s linear infinite;opacity:0}
+@keyframes o15{0%{opacity:0}27.309%{opacity:0}27.310%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o15{animation:o15 69.52s linear infinite;opacity:0}
+@keyframes o16{0%{opacity:0}27.431%{opacity:0}27.432%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o16{animation:o16 69.52s linear infinite;opacity:0}
+@keyframes o17{0%{opacity:0}27.553%{opacity:0}27.554%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o17{animation:o17 69.52s linear infinite;opacity:0}
+@keyframes o18{0%{opacity:0}27.675%{opacity:0}27.676%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o18{animation:o18 69.52s linear infinite;opacity:0}
+@keyframes o19{0%{opacity:0}27.798%{opacity:0}27.799%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o19{animation:o19 69.52s linear infinite;opacity:0}
+@keyframes o20{0%{opacity:0}27.920%{opacity:0}27.921%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o20{animation:o20 69.52s linear infinite;opacity:0}
+@keyframes o21{0%{opacity:0}28.042%{opacity:0}28.043%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o21{animation:o21 69.52s linear infinite;opacity:0}
+@keyframes o22{0%{opacity:0}28.165%{opacity:0}28.166%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o22{animation:o22 69.52s linear infinite;opacity:0}
+@keyframes o23{0%{opacity:0}28.287%{opacity:0}28.288%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o23{animation:o23 69.52s linear infinite;opacity:0}
+@keyframes o24{0%{opacity:0}28.409%{opacity:0}28.410%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o24{animation:o24 69.52s linear infinite;opacity:0}
+@keyframes o25{0%{opacity:0}28.531%{opacity:0}28.532%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o25{animation:o25 69.52s linear infinite;opacity:0}
+@keyframes o26{0%{opacity:0}28.654%{opacity:0}28.655%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o26{animation:o26 69.52s linear infinite;opacity:0}
+@keyframes o27{0%{opacity:0}28.776%{opacity:0}28.777%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o27{animation:o27 69.52s linear infinite;opacity:0}
+@keyframes o28{0%{opacity:0}28.898%{opacity:0}28.899%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o28{animation:o28 69.52s linear infinite;opacity:0}
+@keyframes o29{0%{opacity:0}29.020%{opacity:0}29.021%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o29{animation:o29 69.52s linear infinite;opacity:0}
+@keyframes o30{0%{opacity:0}29.143%{opacity:0}29.144%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o30{animation:o30 69.52s linear infinite;opacity:0}
+@keyframes o31{0%{opacity:0}29.265%{opacity:0}29.266%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o31{animation:o31 69.52s linear infinite;opacity:0}
+@keyframes o32{0%{opacity:0}29.387%{opacity:0}29.388%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o32{animation:o32 69.52s linear infinite;opacity:0}
+@keyframes o33{0%{opacity:0}29.509%{opacity:0}29.510%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o33{animation:o33 69.52s linear infinite;opacity:0}
+@keyframes o34{0%{opacity:0}29.632%{opacity:0}29.633%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o34{animation:o34 69.52s linear infinite;opacity:0}
+@keyframes o35{0%{opacity:0}29.754%{opacity:0}29.755%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o35{animation:o35 69.52s linear infinite;opacity:0}
+@keyframes o36{0%{opacity:0}34.192%{opacity:0}34.193%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o36{animation:o36 69.52s linear infinite;opacity:0}
+@keyframes s37{0%{opacity:0}34.911%{opacity:0}34.912%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.s37{animation:s37 69.52s linear infinite;opacity:0}
+@keyframes c38_0{0%{opacity:0}37.903%{opacity:0}37.904%{opacity:1}38.593%{opacity:1}38.594%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c38_0{animation:c38_0 69.52s linear infinite;opacity:0}
+@keyframes c38_1{0%{opacity:0}38.593%{opacity:0}38.594%{opacity:1}39.284%{opacity:1}39.285%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c38_1{animation:c38_1 69.52s linear infinite;opacity:0}
+@keyframes c38_2{0%{opacity:0}39.284%{opacity:0}39.285%{opacity:1}39.974%{opacity:1}39.975%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c38_2{animation:c38_2 69.52s linear infinite;opacity:0}
+@keyframes c38_3{0%{opacity:0}39.974%{opacity:0}39.975%{opacity:1}40.665%{opacity:1}40.666%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c38_3{animation:c38_3 69.52s linear infinite;opacity:0}
+@keyframes c38_4{0%{opacity:0}40.665%{opacity:0}40.666%{opacity:1}41.355%{opacity:1}41.356%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c38_4{animation:c38_4 69.52s linear infinite;opacity:0}
+@keyframes c38_5{0%{opacity:0}41.355%{opacity:0}41.356%{opacity:1}42.045%{opacity:1}42.046%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c38_5{animation:c38_5 69.52s linear infinite;opacity:0}
+@keyframes c38_6{0%{opacity:0}42.045%{opacity:0}42.046%{opacity:1}42.736%{opacity:1}42.737%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c38_6{animation:c38_6 69.52s linear infinite;opacity:0}
+@keyframes c38_7{0%{opacity:0}42.736%{opacity:0}42.737%{opacity:1}43.426%{opacity:1}43.427%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c38_7{animation:c38_7 69.52s linear infinite;opacity:0}
+@keyframes c38_8{0%{opacity:0}43.426%{opacity:0}43.427%{opacity:1}43.772%{opacity:1}43.773%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c38_8{animation:c38_8 69.52s linear infinite;opacity:0}
+@keyframes c38_9{0%{opacity:0}43.772%{opacity:0}43.773%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c38_9{animation:c38_9 69.52s linear infinite;opacity:0}
+@keyframes o39{0%{opacity:0}44.491%{opacity:0}44.492%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o39{animation:o39 69.52s linear infinite;opacity:0}
+@keyframes o40{0%{opacity:0}44.613%{opacity:0}44.614%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o40{animation:o40 69.52s linear infinite;opacity:0}
+@keyframes c41_0{0%{opacity:0}49.511%{opacity:0}49.512%{opacity:1}49.971%{opacity:1}49.972%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c41_0{animation:c41_0 69.52s linear infinite;opacity:0}
+@keyframes c41_1{0%{opacity:0}49.971%{opacity:0}49.972%{opacity:1}50.432%{opacity:1}50.433%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c41_1{animation:c41_1 69.52s linear infinite;opacity:0}
+@keyframes c41_2{0%{opacity:0}50.432%{opacity:0}50.433%{opacity:1}50.892%{opacity:1}50.893%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c41_2{animation:c41_2 69.52s linear infinite;opacity:0}
+@keyframes c41_3{0%{opacity:0}50.892%{opacity:0}50.893%{opacity:1}51.352%{opacity:1}51.353%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c41_3{animation:c41_3 69.52s linear infinite;opacity:0}
+@keyframes c41_4{0%{opacity:0}51.352%{opacity:0}51.353%{opacity:1}51.812%{opacity:1}51.813%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c41_4{animation:c41_4 69.52s linear infinite;opacity:0}
+@keyframes c41_5{0%{opacity:0}51.812%{opacity:0}51.813%{opacity:1}52.273%{opacity:1}52.274%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c41_5{animation:c41_5 69.52s linear infinite;opacity:0}
+@keyframes c41_6{0%{opacity:0}52.273%{opacity:0}52.274%{opacity:1}52.733%{opacity:1}52.734%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c41_6{animation:c41_6 69.52s linear infinite;opacity:0}
+@keyframes c41_7{0%{opacity:0}52.733%{opacity:0}52.734%{opacity:1}53.193%{opacity:1}53.194%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c41_7{animation:c41_7 69.52s linear infinite;opacity:0}
+@keyframes c41_8{0%{opacity:0}53.193%{opacity:0}53.194%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c41_8{animation:c41_8 69.52s linear infinite;opacity:0}
+@keyframes o42{0%{opacity:0}53.913%{opacity:0}53.914%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o42{animation:o42 69.52s linear infinite;opacity:0}
+@keyframes o43{0%{opacity:0}54.035%{opacity:0}54.036%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o43{animation:o43 69.52s linear infinite;opacity:0}
+@keyframes o44{0%{opacity:0}54.157%{opacity:0}54.158%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o44{animation:o44 69.52s linear infinite;opacity:0}
+@keyframes o45{0%{opacity:0}54.279%{opacity:0}54.280%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o45{animation:o45 69.52s linear infinite;opacity:0}
+@keyframes o46{0%{opacity:0}54.402%{opacity:0}54.403%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o46{animation:o46 69.52s linear infinite;opacity:0}
+@keyframes o47{0%{opacity:0}54.524%{opacity:0}54.525%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o47{animation:o47 69.52s linear infinite;opacity:0}
+@keyframes o48{0%{opacity:0}54.646%{opacity:0}54.647%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o48{animation:o48 69.52s linear infinite;opacity:0}
+@keyframes c49_0{0%{opacity:0}59.199%{opacity:0}59.200%{opacity:1}59.314%{opacity:1}59.315%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c49_0{animation:c49_0 69.52s linear infinite;opacity:0}
+@keyframes c49_1{0%{opacity:0}59.314%{opacity:0}59.315%{opacity:1}59.429%{opacity:1}59.430%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c49_1{animation:c49_1 69.52s linear infinite;opacity:0}
+@keyframes c49_2{0%{opacity:0}59.429%{opacity:0}59.430%{opacity:1}59.544%{opacity:1}59.545%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c49_2{animation:c49_2 69.52s linear infinite;opacity:0}
+@keyframes c49_3{0%{opacity:0}59.544%{opacity:0}59.545%{opacity:1}59.659%{opacity:1}59.660%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c49_3{animation:c49_3 69.52s linear infinite;opacity:0}
+@keyframes c49_4{0%{opacity:0}59.659%{opacity:0}59.660%{opacity:1}59.774%{opacity:1}59.775%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c49_4{animation:c49_4 69.52s linear infinite;opacity:0}
+@keyframes c49_5{0%{opacity:0}59.774%{opacity:0}59.775%{opacity:1}59.889%{opacity:1}59.890%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c49_5{animation:c49_5 69.52s linear infinite;opacity:0}
+@keyframes c49_6{0%{opacity:0}59.889%{opacity:0}59.890%{opacity:1}60.004%{opacity:1}60.005%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c49_6{animation:c49_6 69.52s linear infinite;opacity:0}
+@keyframes c49_7{0%{opacity:0}60.004%{opacity:0}60.005%{opacity:1}60.119%{opacity:1}60.120%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c49_7{animation:c49_7 69.52s linear infinite;opacity:0}
+@keyframes c49_8{0%{opacity:0}60.119%{opacity:0}60.120%{opacity:1}60.234%{opacity:1}60.235%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c49_8{animation:c49_8 69.52s linear infinite;opacity:0}
+@keyframes c49_9{0%{opacity:0}60.234%{opacity:0}60.235%{opacity:1}60.350%{opacity:1}60.351%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c49_9{animation:c49_9 69.52s linear infinite;opacity:0}
+@keyframes c49_10{0%{opacity:0}60.350%{opacity:0}60.351%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c49_10{animation:c49_10 69.52s linear infinite;opacity:0}
+@keyframes o50{0%{opacity:0}61.069%{opacity:0}61.070%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o50{animation:o50 69.52s linear infinite;opacity:0}
+@keyframes c51_0{0%{opacity:0}65.621%{opacity:0}65.622%{opacity:1}65.736%{opacity:1}65.737%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c51_0{animation:c51_0 69.52s linear infinite;opacity:0}
+@keyframes c51_1{0%{opacity:0}65.736%{opacity:0}65.737%{opacity:1}65.852%{opacity:1}65.853%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c51_1{animation:c51_1 69.52s linear infinite;opacity:0}
+@keyframes c51_2{0%{opacity:0}65.852%{opacity:0}65.853%{opacity:1}65.967%{opacity:1}65.968%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c51_2{animation:c51_2 69.52s linear infinite;opacity:0}
+@keyframes c51_3{0%{opacity:0}65.967%{opacity:0}65.968%{opacity:1}66.082%{opacity:1}66.083%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c51_3{animation:c51_3 69.52s linear infinite;opacity:0}
+@keyframes c51_4{0%{opacity:0}66.082%{opacity:0}66.083%{opacity:1}66.197%{opacity:1}66.198%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c51_4{animation:c51_4 69.52s linear infinite;opacity:0}
+@keyframes c51_5{0%{opacity:0}66.197%{opacity:0}66.198%{opacity:1}66.312%{opacity:1}66.313%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c51_5{animation:c51_5 69.52s linear infinite;opacity:0}
+@keyframes c51_6{0%{opacity:0}66.312%{opacity:0}66.313%{opacity:1}66.427%{opacity:1}66.428%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c51_6{animation:c51_6 69.52s linear infinite;opacity:0}
+@keyframes c51_7{0%{opacity:0}66.427%{opacity:0}66.428%{opacity:1}66.542%{opacity:1}66.543%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c51_7{animation:c51_7 69.52s linear infinite;opacity:0}
+@keyframes c51_8{0%{opacity:0}66.542%{opacity:0}66.543%{opacity:1}66.657%{opacity:1}66.658%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c51_8{animation:c51_8 69.52s linear infinite;opacity:0}
+@keyframes c51_9{0%{opacity:0}66.657%{opacity:0}66.658%{opacity:1}66.772%{opacity:1}66.773%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c51_9{animation:c51_9 69.52s linear infinite;opacity:0}
+@keyframes c51_10{0%{opacity:0}66.772%{opacity:0}66.773%{opacity:1}66.830%{opacity:1}66.831%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c51_10{animation:c51_10 69.52s linear infinite;opacity:0}
+@keyframes c51_11{0%{opacity:0}66.830%{opacity:0}66.831%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c51_11{animation:c51_11 69.52s linear infinite;opacity:0}
+@keyframes o52{0%{opacity:0}67.549%{opacity:0}67.550%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o52{animation:o52 69.52s linear infinite;opacity:0}
+@keyframes o53{0%{opacity:0}67.671%{opacity:0}67.672%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o53{animation:o53 69.52s linear infinite;opacity:0}
+@keyframes o54{0%{opacity:0}67.793%{opacity:0}67.794%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o54{animation:o54 69.52s linear infinite;opacity:0}
+@keyframes o55{0%{opacity:0}67.916%{opacity:0}67.917%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o55{animation:o55 69.52s linear infinite;opacity:0}
+@keyframes o56{0%{opacity:0}68.038%{opacity:0}68.039%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o56{animation:o56 69.52s linear infinite;opacity:0}
+@keyframes o57{0%{opacity:0}68.160%{opacity:0}68.161%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o57{animation:o57 69.52s linear infinite;opacity:0}
+@keyframes o58{0%{opacity:0}68.283%{opacity:0}68.284%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o58{animation:o58 69.52s linear infinite;opacity:0}
+@keyframes o59{0%{opacity:0}68.405%{opacity:0}68.406%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o59{animation:o59 69.52s linear infinite;opacity:0}
+@keyframes o60{0%{opacity:0}68.527%{opacity:0}68.528%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o60{animation:o60 69.52s linear infinite;opacity:0}
+@keyframes o61{0%{opacity:0}72.965%{opacity:0}72.966%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o61{animation:o61 69.52s linear infinite;opacity:0}
+@keyframes s62{0%{opacity:0}73.684%{opacity:0}73.685%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.s62{animation:s62 69.52s linear infinite;opacity:0}
+@keyframes c63_0{0%{opacity:0}76.215%{opacity:0}76.216%{opacity:1}76.446%{opacity:1}76.447%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c63_0{animation:c63_0 69.52s linear infinite;opacity:0}
+@keyframes c63_1{0%{opacity:0}76.446%{opacity:0}76.447%{opacity:1}76.676%{opacity:1}76.677%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c63_1{animation:c63_1 69.52s linear infinite;opacity:0}
+@keyframes c63_2{0%{opacity:0}76.676%{opacity:0}76.677%{opacity:1}76.906%{opacity:1}76.907%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c63_2{animation:c63_2 69.52s linear infinite;opacity:0}
+@keyframes c63_3{0%{opacity:0}76.906%{opacity:0}76.907%{opacity:1}77.136%{opacity:1}77.137%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c63_3{animation:c63_3 69.52s linear infinite;opacity:0}
+@keyframes c63_4{0%{opacity:0}77.136%{opacity:0}77.137%{opacity:1}77.366%{opacity:1}77.367%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c63_4{animation:c63_4 69.52s linear infinite;opacity:0}
+@keyframes c63_5{0%{opacity:0}77.366%{opacity:0}77.367%{opacity:1}77.596%{opacity:1}77.597%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c63_5{animation:c63_5 69.52s linear infinite;opacity:0}
+@keyframes c63_6{0%{opacity:0}77.596%{opacity:0}77.597%{opacity:1}77.827%{opacity:1}77.828%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c63_6{animation:c63_6 69.52s linear infinite;opacity:0}
+@keyframes c63_7{0%{opacity:0}77.827%{opacity:0}77.828%{opacity:1}78.057%{opacity:1}78.058%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c63_7{animation:c63_7 69.52s linear infinite;opacity:0}
+@keyframes c63_8{0%{opacity:0}78.057%{opacity:0}78.058%{opacity:1}78.287%{opacity:1}78.288%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c63_8{animation:c63_8 69.52s linear infinite;opacity:0}
+@keyframes c63_9{0%{opacity:0}78.287%{opacity:0}78.288%{opacity:1}78.402%{opacity:1}78.403%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c63_9{animation:c63_9 69.52s linear infinite;opacity:0}
+@keyframes c63_10{0%{opacity:0}78.402%{opacity:0}78.403%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c63_10{animation:c63_10 69.52s linear infinite;opacity:0}
+@keyframes o64{0%{opacity:0}79.121%{opacity:0}79.122%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o64{animation:o64 69.52s linear infinite;opacity:0}
+@keyframes o65{0%{opacity:0}79.243%{opacity:0}79.244%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o65{animation:o65 69.52s linear infinite;opacity:0}
+@keyframes o66{0%{opacity:0}79.366%{opacity:0}79.367%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o66{animation:o66 69.52s linear infinite;opacity:0}
+@keyframes o67{0%{opacity:0}79.488%{opacity:0}79.489%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o67{animation:o67 69.52s linear infinite;opacity:0}
+@keyframes o68{0%{opacity:0}79.610%{opacity:0}79.611%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o68{animation:o68 69.52s linear infinite;opacity:0}
+@keyframes o69{0%{opacity:0}79.732%{opacity:0}79.733%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o69{animation:o69 69.52s linear infinite;opacity:0}
+@keyframes o70{0%{opacity:0}79.855%{opacity:0}79.856%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o70{animation:o70 69.52s linear infinite;opacity:0}
+@keyframes o71{0%{opacity:0}79.977%{opacity:0}79.978%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o71{animation:o71 69.52s linear infinite;opacity:0}
+@keyframes o72{0%{opacity:0}80.099%{opacity:0}80.100%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o72{animation:o72 69.52s linear infinite;opacity:0}
+@keyframes o73{0%{opacity:0}80.222%{opacity:0}80.223%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o73{animation:o73 69.52s linear infinite;opacity:0}
+@keyframes o74{0%{opacity:0}80.344%{opacity:0}80.345%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o74{animation:o74 69.52s linear infinite;opacity:0}
+@keyframes o75{0%{opacity:0}80.466%{opacity:0}80.467%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o75{animation:o75 69.52s linear infinite;opacity:0}
+@keyframes o76{0%{opacity:0}80.588%{opacity:0}80.589%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o76{animation:o76 69.52s linear infinite;opacity:0}
+@keyframes o77{0%{opacity:0}80.711%{opacity:0}80.712%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o77{animation:o77 69.52s linear infinite;opacity:0}
+@keyframes o78{0%{opacity:0}80.833%{opacity:0}80.834%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o78{animation:o78 69.52s linear infinite;opacity:0}
+@keyframes o79{0%{opacity:0}80.955%{opacity:0}80.956%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o79{animation:o79 69.52s linear infinite;opacity:0}
+@keyframes o80{0%{opacity:0}81.077%{opacity:0}81.078%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o80{animation:o80 69.52s linear infinite;opacity:0}
+@keyframes o81{0%{opacity:0}81.200%{opacity:0}81.201%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o81{animation:o81 69.52s linear infinite;opacity:0}
+@keyframes o82{0%{opacity:0}81.322%{opacity:0}81.323%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o82{animation:o82 69.52s linear infinite;opacity:0}
+@keyframes o83{0%{opacity:0}81.444%{opacity:0}81.445%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o83{animation:o83 69.52s linear infinite;opacity:0}
+@keyframes o84{0%{opacity:0}81.566%{opacity:0}81.567%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o84{animation:o84 69.52s linear infinite;opacity:0}
+@keyframes o85{0%{opacity:0}81.689%{opacity:0}81.690%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o85{animation:o85 69.52s linear infinite;opacity:0}
+@keyframes o86{0%{opacity:0}81.811%{opacity:0}81.812%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o86{animation:o86 69.52s linear infinite;opacity:0}
+@keyframes o87{0%{opacity:0}81.933%{opacity:0}81.934%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o87{animation:o87 69.52s linear infinite;opacity:0}
+@keyframes c88_0{0%{opacity:0}86.601%{opacity:0}86.602%{opacity:1}86.831%{opacity:1}86.832%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c88_0{animation:c88_0 69.52s linear infinite;opacity:0}
+@keyframes c88_1{0%{opacity:0}86.831%{opacity:0}86.832%{opacity:1}87.061%{opacity:1}87.062%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c88_1{animation:c88_1 69.52s linear infinite;opacity:0}
+@keyframes c88_2{0%{opacity:0}87.061%{opacity:0}87.062%{opacity:1}87.291%{opacity:1}87.292%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c88_2{animation:c88_2 69.52s linear infinite;opacity:0}
+@keyframes c88_3{0%{opacity:0}87.291%{opacity:0}87.292%{opacity:1}87.522%{opacity:1}87.523%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c88_3{animation:c88_3 69.52s linear infinite;opacity:0}
+@keyframes c88_4{0%{opacity:0}87.522%{opacity:0}87.523%{opacity:1}87.752%{opacity:1}87.753%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c88_4{animation:c88_4 69.52s linear infinite;opacity:0}
+@keyframes c88_5{0%{opacity:0}87.752%{opacity:0}87.753%{opacity:1}87.982%{opacity:1}87.983%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c88_5{animation:c88_5 69.52s linear infinite;opacity:0}
+@keyframes c88_6{0%{opacity:0}87.982%{opacity:0}87.983%{opacity:1}88.212%{opacity:1}88.213%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c88_6{animation:c88_6 69.52s linear infinite;opacity:0}
+@keyframes c88_7{0%{opacity:0}88.212%{opacity:0}88.213%{opacity:1}88.442%{opacity:1}88.443%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c88_7{animation:c88_7 69.52s linear infinite;opacity:0}
+@keyframes c88_8{0%{opacity:0}88.442%{opacity:0}88.443%{opacity:1}88.672%{opacity:1}88.673%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c88_8{animation:c88_8 69.52s linear infinite;opacity:0}
+@keyframes c88_9{0%{opacity:0}88.672%{opacity:0}88.673%{opacity:1}88.845%{opacity:1}88.846%{opacity:0}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c88_9{animation:c88_9 69.52s linear infinite;opacity:0}
+@keyframes c88_10{0%{opacity:0}88.845%{opacity:0}88.846%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.c88_10{animation:c88_10 69.52s linear infinite;opacity:0}
+@keyframes o89{0%{opacity:0}89.564%{opacity:0}89.565%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o89{animation:o89 69.52s linear infinite;opacity:0}
+@keyframes o90{0%{opacity:0}89.686%{opacity:0}89.687%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o90{animation:o90 69.52s linear infinite;opacity:0}
+@keyframes o91{0%{opacity:0}89.809%{opacity:0}89.810%{opacity:1}99.712%{opacity:1}99.9%{opacity:0}100%{opacity:0}}
+.o91{animation:o91 69.52s linear infinite;opacity:0}
+.scroll{animation:scroll 69.52s linear infinite}
+</style>
+<defs><clipPath id="v"><rect x="0" y="0" width="873" height="544"/></clipPath></defs>
+<rect width="913" height="592" rx="10" fill="#0d1117"/>
+<rect width="913" height="30" rx="10" fill="#161b22"/><rect y="20" width="913" height="10" fill="#161b22"/>
+<circle cx="18" cy="15" r="6" fill="#ff5f56"/><circle cx="38" cy="15" r="6" fill="#ffbd2e"/><circle cx="58" cy="15" r="6" fill="#27c93f"/>
+<text x="456" y="20" fill="#8b949e" text-anchor="middle" style="font-size:12px">telemetry-lakehouse - real run, replayed (about 70s)</text>
+<g transform="translate(20,44)"><g clip-path="url(#v)"><g class="scroll">
+<text class="s0" x="0" y="18" fill="#7d8590" font-style="italic"># 1. A valid stream: 20,000 events from 1,000 devices -&gt; committed batches</text>
+<text class="c1_0" x="0" y="36"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run </tspan></text>
+<text class="c1_1" x="0" y="36"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemet</tspan></text>
+<text class="c1_2" x="0" y="36"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry simu</tspan></text>
+<text class="c1_3" x="0" y="36"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry simulate --</tspan></text>
+<text class="c1_4" x="0" y="36"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry simulate --devices</tspan></text>
+<text class="c1_5" x="0" y="36"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry simulate --devices 1000 -</tspan></text>
+<text class="c1_6" x="0" y="36"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry simulate --devices 1000 --events</tspan></text>
+<text class="c1_7" x="0" y="36"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry simulate --devices 1000 --events 20000 </tspan></text>
+<text class="c1_8" x="0" y="36"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry simulate --devices 1000 --events 20000 --seed </tspan></text>
+<text class="c1_9" x="0" y="36"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry simulate --devices 1000 --events 20000 --seed 42</tspan></text>
+<text class="o2" x="0" y="54"><tspan fill="#c9d1d9">{&quot;source&quot;: &quot;lakehouse/source/events.jsonl&quot;, &quot;source_id&quot;: &quot;sim-seed42&quot;, &quot;records&quot;: 20000, &quot;complete&quot;: true, </tspan></text>
+<text class="o3" x="0" y="72"><tspan fill="#c9d1d9">    &quot;faults_injected&quot;: {}}</tspan></text>
+<text class="c4_0" x="0" y="90"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run</tspan></text>
+<text class="c4_1" x="0" y="90"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telem</tspan></text>
+<text class="c4_2" x="0" y="90"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry i</tspan></text>
+<text class="c4_3" x="0" y="90"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry ingest </tspan></text>
+<text class="c4_4" x="0" y="90"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry ingest --batc</tspan></text>
+<text class="c4_5" x="0" y="90"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry ingest --batch-size</tspan></text>
+<text class="c4_6" x="0" y="90"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry ingest --batch-size 5000 </tspan></text>
+<text class="c4_7" x="0" y="90"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry ingest --batch-size 5000 --form</tspan></text>
+<text class="c4_8" x="0" y="90"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry ingest --batch-size 5000 --format tex</tspan></text>
+<text class="c4_9" x="0" y="90"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry ingest --batch-size 5000 --format text</tspan></text>
+<text class="o5" x="0" y="108"><tspan fill="#c9d1d9">source sim-seed42: read 20,000 records in 4 batches -&gt; 20,000 rows committed in 4 files (0 batches already </tspan></text>
+<text class="o6" x="0" y="126"><tspan fill="#c9d1d9">    committed, 0 blocked) in 0.30s (67,775 events/s)</tspan></text>
+<text class="o7" x="0" y="144"><tspan fill="#c9d1d9">  accounting: consumed=20,000 accepted=20,000 duplicates=0 rejected=0 unresolved=0 committed=20,000</tspan></text>
+<text class="o8" x="0" y="162"><tspan fill="#c9d1d9">  sequences: 0 gaps proven (0 events missing, basis: end_of_stream)</tspan></text>
+<text class="o9" x="0" y="180"><tspan fill="#c9d1d9"></tspan></text>
+<text class="s10" x="0" y="198" fill="#7d8590" font-style="italic"># DuckDB re-verifies the published Parquet with 18 independent SQL assertions</text>
+<text class="c11_0" x="0" y="216"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv</tspan></text>
+<text class="c11_1" x="0" y="216"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv r</tspan></text>
+<text class="c11_2" x="0" y="216"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run</tspan></text>
+<text class="c11_3" x="0" y="216"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run t</tspan></text>
+<text class="c11_4" x="0" y="216"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run tel</tspan></text>
+<text class="c11_5" x="0" y="216"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telem</tspan></text>
+<text class="c11_6" x="0" y="216"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemet</tspan></text>
+<text class="c11_7" x="0" y="216"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry</tspan></text>
+<text class="c11_8" x="0" y="216"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry v</tspan></text>
+<text class="c11_9" x="0" y="216"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry ver</tspan></text>
+<text class="c11_10" x="0" y="216"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry verif</tspan></text>
+<text class="c11_11" x="0" y="216"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry verify</tspan></text>
+<text class="o12" x="0" y="234"><tspan fill="#c9d1d9">Telemetry Lakehouse integrity report</tspan></text>
+<text class="o13" x="0" y="252"><tspan fill="#c9d1d9">dataset : 20,000 events | 1,000 devices | 4 files | 4 committed batches | dates 2026-01-01 .. 2026-01-01</tspan></text>
+<text class="o14" x="0" y="270"><tspan fill="#c9d1d9">manifest: last commit_seq 4 | batch states {&#x27;COMMITTED&#x27;: 4}</tspan></text>
+<text class="o15" x="0" y="288"><tspan fill="#c9d1d9"></tspan></text>
+<text class="o16" x="0" y="306"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  identity       unique_event_id                      0 violations</tspan></text>
+<text class="o17" x="0" y="324"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  identity       unique_device_sequence               0 violations</tspan></text>
+<text class="o18" x="0" y="342"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  contract       required_fields_complete             0 violations</tspan></text>
+<text class="o19" x="0" y="360"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  contract       valid_measurement_ranges             0 violations</tspan></text>
+<text class="o20" x="0" y="378"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  contract       valid_enums_and_versions             0 violations</tspan></text>
+<text class="o21" x="0" y="396"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  contract       event_time_not_in_future             0 violations</tspan></text>
+<text class="o22" x="0" y="414"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  partitioning   partition_matches_event_time         0 violations</tspan></text>
+<text class="o23" x="0" y="432"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  contract       parquet_schema_matches_contract      0 violations</tspan></text>
+<text class="o24" x="0" y="450"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  reconciliation batch_accounting_identity            0 violations</tspan></text>
+<text class="o25" x="0" y="468"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  reconciliation batch_row_counts_reconcile           0 violations</tspan></text>
+<text class="o26" x="0" y="486"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  trust          no_untrusted_batches_in_data         0 violations</tspan></text>
+<text class="o27" x="0" y="504"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  trust          events_and_index_agree               0 violations</tspan></text>
+<text class="o28" x="0" y="522"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  trust          no_unreferenced_files_in_data        0 violations</tspan></text>
+<text class="o29" x="0" y="540"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  consistency    manifest_files_match_physical        0 violations</tspan></text>
+<text class="o30" x="0" y="558"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  consistency    no_unfinished_batches                0 violations</tspan></text>
+<text class="o31" x="0" y="576"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  completeness   sequence_gaps_beyond_grace           0 violations</tspan></text>
+<text class="o32" x="0" y="594"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  completeness   sequences_complete_to_end_of_stream  0 violations</tspan></text>
+<text class="o33" x="0" y="612"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  completeness   offset_coverage_no_holes             0 violations</tspan></text>
+<text class="o34" x="0" y="630"><tspan fill="#c9d1d9"></tspan></text>
+<text class="o35" x="0" y="648"><tspan fill="#3fb950">RESULT: PASS - 18 pass (18 assertions)</tspan></text>
+<text class="o36" x="0" y="666"><tspan fill="#c9d1d9"></tspan></text>
+<text class="s37" x="0" y="684" fill="#7d8590" font-style="italic"># 2. A second source with corrupted measurements injected</text>
+<text class="c38_0" x="0" y="702"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telem</tspan></text>
+<text class="c38_1" x="0" y="702"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry simulat</tspan></text>
+<text class="c38_2" x="0" y="702"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry simulate --events 2</tspan></text>
+<text class="c38_3" x="0" y="702"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry simulate --events 20000 --seed </tspan></text>
+<text class="c38_4" x="0" y="702"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry simulate --events 20000 --seed 43 --device-</tspan></text>
+<text class="c38_5" x="0" y="702"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry simulate --events 20000 --seed 43 --device-prefix edge </tspan></text>
+<text class="c38_6" x="0" y="702"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry simulate --events 20000 --seed 43 --device-prefix edge --out b.json</tspan></text>
+<text class="c38_7" x="0" y="702"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry simulate --events 20000 --seed 43 --device-prefix edge --out b.jsonl --fault in</tspan></text>
+<text class="c38_8" x="0" y="702"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry simulate --events 20000 --seed 43 --device-prefix edge --out b.jsonl --fault invalid_value=</tspan></text>
+<text class="c38_9" x="0" y="702"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry simulate --events 20000 --seed 43 --device-prefix edge --out b.jsonl --fault invalid_value=0.0002</tspan></text>
+<text class="o39" x="0" y="720"><tspan fill="#c9d1d9">{&quot;source&quot;: &quot;b.jsonl&quot;, &quot;source_id&quot;: &quot;sim-seed43&quot;, &quot;records&quot;: 20000, &quot;complete&quot;: true, &quot;faults_injected&quot;: </tspan></text>
+<text class="o40" x="0" y="738"><tspan fill="#c9d1d9">    {&quot;invalid_value&quot;: 6}}</tspan></text>
+<text class="c41_0" x="0" y="756"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run t</tspan></text>
+<text class="c41_1" x="0" y="756"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry</tspan></text>
+<text class="c41_2" x="0" y="756"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry ingest </tspan></text>
+<text class="c41_3" x="0" y="756"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry ingest --source</tspan></text>
+<text class="c41_4" x="0" y="756"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry ingest --source b.jsonl</tspan></text>
+<text class="c41_5" x="0" y="756"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry ingest --source b.jsonl --batch</tspan></text>
+<text class="c41_6" x="0" y="756"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry ingest --source b.jsonl --batch-size 50</tspan></text>
+<text class="c41_7" x="0" y="756"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry ingest --source b.jsonl --batch-size 5000 --for</tspan></text>
+<text class="c41_8" x="0" y="756"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry ingest --source b.jsonl --batch-size 5000 --format text</tspan></text>
+<text class="o42" x="0" y="774"><tspan fill="#c9d1d9">source sim-seed43: read 10,000 records in 2 batches -&gt; 5,000 rows committed in 1 file (0 batches already </tspan></text>
+<text class="o43" x="0" y="792"><tspan fill="#c9d1d9">    committed, 1 blocked) in 0.11s (90,697 events/s)</tspan></text>
+<text class="o44" x="0" y="810"><tspan fill="#c9d1d9">  accounting: consumed=10,000 accepted=9,998 duplicates=0 rejected=2 unresolved=0 committed=5,000</tspan></text>
+<text class="o45" x="0" y="828"><tspan fill="#c9d1d9">  (a blocked batch is classified but publishes nothing: committed counts only admitted batches)</tspan></text>
+<text class="o46" x="0" y="846"><tspan fill="#c9d1d9">  </tspan><tspan fill="#f85149">BLOCKED batch</tspan><tspan fill="#c9d1d9"> b8ff3fd422ee51627 offsets [5,000, 10,000): OUT_OF_RANGE=2</tspan></text>
+<text class="o47" x="0" y="864"><tspan fill="#c9d1d9">    evidence: lakehouse/rejected/b8ff3fd422ee51627/attempt-0001/report.json</tspan></text>
+<text class="o48" x="0" y="882"><tspan fill="#d29922">  run halted at the blocked batch: nothing after it was published</tspan></text>
+<text class="c49_0" x="0" y="900"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">ec</tspan></text>
+<text class="c49_1" x="0" y="900"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">echo</tspan></text>
+<text class="c49_2" x="0" y="900"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">echo &quot;</tspan></text>
+<text class="c49_3" x="0" y="900"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">echo &quot;ex</tspan></text>
+<text class="c49_4" x="0" y="900"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">echo &quot;exit</tspan></text>
+<text class="c49_5" x="0" y="900"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">echo &quot;exit s</tspan></text>
+<text class="c49_6" x="0" y="900"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">echo &quot;exit sta</tspan></text>
+<text class="c49_7" x="0" y="900"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">echo &quot;exit statu</tspan></text>
+<text class="c49_8" x="0" y="900"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">echo &quot;exit status:</tspan></text>
+<text class="c49_9" x="0" y="900"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">echo &quot;exit status: $</tspan></text>
+<text class="c49_10" x="0" y="900"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">echo &quot;exit status: $?&quot;</tspan></text>
+<text class="o50" x="0" y="918"><tspan fill="#d29922">exit status: 3</tspan></text>
+<text class="c51_0" x="0" y="936"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv</tspan></text>
+<text class="c51_1" x="0" y="936"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv r</tspan></text>
+<text class="c51_2" x="0" y="936"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run</tspan></text>
+<text class="c51_3" x="0" y="936"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run t</tspan></text>
+<text class="c51_4" x="0" y="936"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run tel</tspan></text>
+<text class="c51_5" x="0" y="936"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telem</tspan></text>
+<text class="c51_6" x="0" y="936"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemet</tspan></text>
+<text class="c51_7" x="0" y="936"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry</tspan></text>
+<text class="c51_8" x="0" y="936"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry s</tspan></text>
+<text class="c51_9" x="0" y="936"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry sta</tspan></text>
+<text class="c51_10" x="0" y="936"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry statu</tspan></text>
+<text class="c51_11" x="0" y="936"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry status</tspan></text>
+<text class="o52" x="0" y="954"><tspan fill="#c9d1d9">{</tspan></text>
+<text class="o53" x="0" y="972"><tspan fill="#c9d1d9">  &quot;batches&quot;: {</tspan></text>
+<text class="o54" x="0" y="990"><tspan fill="#c9d1d9">    &quot;COMMITTED&quot;: 5,</tspan></text>
+<text class="o55" x="0" y="1008"><tspan fill="#c9d1d9">    &quot;REJECTED&quot;: 1</tspan></text>
+<text class="o56" x="0" y="1026"><tspan fill="#c9d1d9">  },</tspan></text>
+<text class="o57" x="0" y="1044"><tspan fill="#c9d1d9">  &quot;last_commit_seq&quot;: 5,</tspan></text>
+<text class="o58" x="0" y="1062"><tspan fill="#c9d1d9">  &quot;committed_rows&quot;: 25000,</tspan></text>
+<text class="o59" x="0" y="1080"><tspan fill="#c9d1d9">  &quot;in_flight&quot;: []</tspan></text>
+<text class="o60" x="0" y="1098"><tspan fill="#c9d1d9">}</tspan></text>
+<text class="o61" x="0" y="1116"><tspan fill="#c9d1d9"></tspan></text>
+<text class="s62" x="0" y="1134" fill="#7d8590" font-style="italic"># 3. The rejected batch never reached the trusted data - DuckDB agrees</text>
+<text class="c63_0" x="0" y="1152"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv r</tspan></text>
+<text class="c63_1" x="0" y="1152"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run t</tspan></text>
+<text class="c63_2" x="0" y="1152"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telem</tspan></text>
+<text class="c63_3" x="0" y="1152"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry</tspan></text>
+<text class="c63_4" x="0" y="1152"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry ver</tspan></text>
+<text class="c63_5" x="0" y="1152"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry verify </tspan></text>
+<text class="c63_6" x="0" y="1152"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry verify --al</tspan></text>
+<text class="c63_7" x="0" y="1152"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry verify --allow-</tspan></text>
+<text class="c63_8" x="0" y="1152"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry verify --allow-inco</tspan></text>
+<text class="c63_9" x="0" y="1152"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry verify --allow-incomple</tspan></text>
+<text class="c63_10" x="0" y="1152"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry verify --allow-incomplete</tspan></text>
+<text class="o64" x="0" y="1170"><tspan fill="#c9d1d9">Telemetry Lakehouse integrity report</tspan></text>
+<text class="o65" x="0" y="1188"><tspan fill="#c9d1d9">dataset : 25,000 events | 1,985 devices | 5 files | 5 committed batches | dates 2026-01-01 .. 2026-01-01</tspan></text>
+<text class="o66" x="0" y="1206"><tspan fill="#c9d1d9">manifest: last commit_seq 5 | batch states {&#x27;COMMITTED&#x27;: 5, &#x27;REJECTED&#x27;: 1}</tspan></text>
+<text class="o67" x="0" y="1224"><tspan fill="#c9d1d9"></tspan></text>
+<text class="o68" x="0" y="1242"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  identity       unique_event_id                      0 violations</tspan></text>
+<text class="o69" x="0" y="1260"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  identity       unique_device_sequence               0 violations</tspan></text>
+<text class="o70" x="0" y="1278"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  contract       required_fields_complete             0 violations</tspan></text>
+<text class="o71" x="0" y="1296"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  contract       valid_measurement_ranges             0 violations</tspan></text>
+<text class="o72" x="0" y="1314"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  contract       valid_enums_and_versions             0 violations</tspan></text>
+<text class="o73" x="0" y="1332"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  contract       event_time_not_in_future             0 violations</tspan></text>
+<text class="o74" x="0" y="1350"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  partitioning   partition_matches_event_time         0 violations</tspan></text>
+<text class="o75" x="0" y="1368"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  contract       parquet_schema_matches_contract      0 violations</tspan></text>
+<text class="o76" x="0" y="1386"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  reconciliation batch_accounting_identity            0 violations</tspan></text>
+<text class="o77" x="0" y="1404"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  reconciliation batch_row_counts_reconcile           0 violations</tspan></text>
+<text class="o78" x="0" y="1422"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  trust          no_untrusted_batches_in_data         0 violations</tspan></text>
+<text class="o79" x="0" y="1440"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  trust          events_and_index_agree               0 violations</tspan></text>
+<text class="o80" x="0" y="1458"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  trust          no_unreferenced_files_in_data        0 violations</tspan></text>
+<text class="o81" x="0" y="1476"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  consistency    manifest_files_match_physical        0 violations</tspan></text>
+<text class="o82" x="0" y="1494"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  consistency    no_unfinished_batches                0 violations</tspan></text>
+<text class="o83" x="0" y="1512"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  completeness   sequence_gaps_beyond_grace           0 violations</tspan></text>
+<text class="o84" x="0" y="1530"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  completeness   sequences_complete_to_end_of_stream  0 violations</tspan></text>
+<text class="o85" x="0" y="1548"><tspan fill="#3fb950">PASS</tspan><tspan fill="#c9d1d9">  completeness   offset_coverage_no_holes             0 violations</tspan></text>
+<text class="o86" x="0" y="1566"><tspan fill="#c9d1d9"></tspan></text>
+<text class="o87" x="0" y="1584"><tspan fill="#3fb950">RESULT: PASS - 18 pass (18 assertions)</tspan></text>
+<text class="c88_0" x="0" y="1602"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv r</tspan></text>
+<text class="c88_1" x="0" y="1602"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run t</tspan></text>
+<text class="c88_2" x="0" y="1602"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telem</tspan></text>
+<text class="c88_3" x="0" y="1602"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry</tspan></text>
+<text class="c88_4" x="0" y="1602"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry que</tspan></text>
+<text class="c88_5" x="0" y="1602"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry query -</tspan></text>
+<text class="c88_6" x="0" y="1602"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry query --nam</tspan></text>
+<text class="c88_7" x="0" y="1602"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry query --name fl</tspan></text>
+<text class="c88_8" x="0" y="1602"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry query --name fleet-</tspan></text>
+<text class="c88_9" x="0" y="1602"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry query --name fleet-summ</tspan></text>
+<text class="c88_10" x="0" y="1602"><tspan fill="#3fb950">$ </tspan><tspan fill="#e6edf3">uv run telemetry query --name fleet-summary</tspan></text>
+<text class="o89" x="0" y="1620"><tspan fill="#c9d1d9">event_date  events  active_devices  avg_temperature_c  avg_battery_pct  non_ok_pct</tspan></text>
+<text class="o90" x="0" y="1638"><tspan fill="#c9d1d9">----------  ------  --------------  -----------------  ---------------  ----------</tspan></text>
+<text class="o91" x="0" y="1656"><tspan fill="#c9d1d9">2026-01-01  25000   1985            16.64              64.94            1.216     </tspan></text>
+</g></g></g>
+</svg>
