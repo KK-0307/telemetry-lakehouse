@@ -1,5 +1,7 @@
 # Telemetry Lakehouse
 
+[![CI](https://github.com/KK-0307/telemetry-lakehouse/actions/workflows/ci.yml/badge.svg)](https://github.com/KK-0307/telemetry-lakehouse/actions/workflows/ci.yml)
+
 An integrity-gated streaming-to-Parquet pipeline in Python. A simulated device fleet is consumed as bounded
 micro-batches, validated by an explicit integrity gate, written as immutable partitioned Parquet, and made
 visible by a single SQLite transaction. DuckDB then answers analytical questions **and independently proves**
@@ -19,7 +21,7 @@ This repository builds that end to end, tests it with real process kills, and is
 
 *A real run, replayed:* the output text and exit statuses are exactly what the commands produced
 ([transcript](docs/demo/transcript.txt), [raw capture](docs/demo/session.json)); only the typing speed and output
-pacing are synthetic. The commands themselves took ≈ 3 s in total. Regenerate it with
+pacing are synthetic. The commands themselves took ≈ 4 s in total. Regenerate it with
 `uv run python scripts/record_demo.py`; the full eight-step demonstration is [`scripts/demo.sh`](scripts/demo.sh).
 
 ## Architecture
